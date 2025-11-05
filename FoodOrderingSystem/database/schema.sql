@@ -4,6 +4,8 @@
 -- Author: Jayanth
 -- ========================================
 -- Run: CREATE DATABASE food_ordering_system;
+-- Run: USE food_ordering_system;
+-- Then execute this script to create tables
 -- Then execute this script to create tables
 -- ========================================
 

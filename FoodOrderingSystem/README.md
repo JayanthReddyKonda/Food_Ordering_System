@@ -7,7 +7,8 @@ A console-based food ordering application with Java and MySQL. Users can registe
 ## Requirements
 
 - Java JDK 8+
-- MySQL Server running locally
+- MySQL Server (running locally or remotely)
+- MySQL Client/Shell (`mysql` command-line tool) to run schema file
 - MySQL Connector/J JAR file
 - Database `food_ordering_system` must exist
 
@@ -20,6 +21,8 @@ CREATE DATABASE food_ordering_system;
 ```
 
 ### 2. Create Tables
+
+Run this command in your terminal to import the tables into the existing `food_ordering_system` database:
 
 ```bash
 mysql -u root -p food_ordering_system < database/schema.sql
@@ -44,7 +47,6 @@ PASSWORD = "jayanth"
 ```bash
 # Windows
 javac -cp "lib\*" -d bin src\com\foodordering\*.java
-
 ```
 
 Or use: `.\compile.ps1` (Windows)
@@ -54,9 +56,9 @@ Or use: `.\compile.ps1` (Windows)
 ```bash
 # Windows
 java -cp "bin;lib\*" com.foodordering.App
+```
 
-
-Or use: `.\run.ps1` (Windows) 
+Or use: `.\run.ps1` (Windows)
 
 ## Usage
 
@@ -83,7 +85,7 @@ Or use: `.\run.ps1` (Windows)
 
 ## Project Structure
 
-```text
+```FolderStructure
 FoodOrderingSystem/
 ├── src/com/foodordering/
 │   ├── App.java          # Main entry point
