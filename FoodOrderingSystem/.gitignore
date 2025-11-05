@@ -1,0 +1,39 @@
+# Compiled class files
+*.class
+
+# Binary directories (keep folder structure)
+/bin/*
+!/bin/README.md
+/target/
+/out/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Keep lib folder structure and MySQL Connector
+!/lib/README.md
+!lib/mysql-connector-*.jar
