@@ -25,11 +25,11 @@ public class Database {
         try {
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("✓ Connected to database");
+                System.out.println("[OK] Connected to database");
             }
             return connection;
         } catch (SQLException e) {
-            System.err.println("❌ Database connection failed: " + e.getMessage());
+            System.err.println("[ERROR] Database connection failed: " + e.getMessage());
             return null;
         }
     }
@@ -41,7 +41,7 @@ public class Database {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("✓ Database connection closed");
+                System.out.println("[OK] Database connection closed");
             }
         } catch (SQLException e) {
             System.err.println("Error closing connection: " + e.getMessage());

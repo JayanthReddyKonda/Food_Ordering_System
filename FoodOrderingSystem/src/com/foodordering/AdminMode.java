@@ -27,11 +27,11 @@ public class AdminMode {
         String password = scanner.nextLine();
         
         if (!password.equals(ADMIN_PASSWORD)) {
-            System.out.println("❌ Invalid password");
+            System.out.println("[ERROR] Invalid password");
             return;
         }
         
-        System.out.println("✓ Admin login successful");
+        System.out.println("[OK] Admin login successful");
         
         while (true) {
             System.out.println("\n=== ADMIN MODE ===");
@@ -56,7 +56,7 @@ public class AdminMode {
             } else if (choice.equals("5")) {
                 viewAllOrders();
             } else if (choice.equals("6")) {
-                System.out.println("✓ Admin logged out");
+                System.out.println("[OK] Admin logged out");
                 break;
             } else {
                 System.out.println("Invalid choice");
@@ -86,7 +86,7 @@ public class AdminMode {
                     stockStr);
             }
         } catch (SQLException e) {
-            System.out.println("❌ Failed to load items: " + e.getMessage());
+            System.out.println("[ERROR] Failed to load items: " + e.getMessage());
         }
     }
     
@@ -99,7 +99,7 @@ public class AdminMode {
             String name = scanner.nextLine().trim();
             
             if (name.isEmpty()) {
-                System.out.println("❌ Name cannot be empty");
+                System.out.println("[ERROR] Name cannot be empty");
                 return;
             }
             
@@ -107,7 +107,7 @@ public class AdminMode {
             double price = Double.parseDouble(scanner.nextLine());
             
             if (price <= 0) {
-                System.out.println("❌ Price must be positive");
+                System.out.println("[ERROR] Price must be positive");
                 return;
             }
             
@@ -115,7 +115,7 @@ public class AdminMode {
             int quantity = Integer.parseInt(scanner.nextLine());
             
             if (quantity < 0) {
-                System.out.println("❌ Stock cannot be negative");
+                System.out.println("[ERROR] Stock cannot be negative");
                 return;
             }
             
@@ -127,12 +127,12 @@ public class AdminMode {
                 stmt.executeUpdate();
             }
             
-            System.out.println("✓ Item added successfully!");
+            System.out.println("[OK] Item added successfully!");
             
         } catch (NumberFormatException e) {
-            System.out.println("❌ Invalid input");
+            System.out.println("[ERROR] Invalid input");
         } catch (SQLException e) {
-            System.out.println("❌ Failed to add item: " + e.getMessage());
+            System.out.println("[ERROR] Failed to add item: " + e.getMessage());
         }
     }
     
@@ -150,7 +150,7 @@ public class AdminMode {
             double newPrice = Double.parseDouble(scanner.nextLine());
             
             if (newPrice <= 0) {
-                System.out.println("❌ Price must be positive");
+                System.out.println("[ERROR] Price must be positive");
                 return;
             }
             
@@ -161,15 +161,15 @@ public class AdminMode {
                 
                 int rows = stmt.executeUpdate();
                 if (rows > 0) {
-                    System.out.println("✓ Price updated successfully!");
+                    System.out.println("[OK] Price updated successfully!");
                 } else {
-                    System.out.println("❌ Item not found");
+                    System.out.println("[ERROR] Item not found");
                 }
             }
         } catch (NumberFormatException e) {
-            System.out.println("❌ Invalid input");
+            System.out.println("[ERROR] Invalid input");
         } catch (SQLException e) {
-            System.out.println("❌ Failed to update price: " + e.getMessage());
+            System.out.println("[ERROR] Failed to update price: " + e.getMessage());
         }
     }
     
@@ -187,7 +187,7 @@ public class AdminMode {
             int newQuantity = Integer.parseInt(scanner.nextLine());
             
             if (newQuantity < 0) {
-                System.out.println("❌ Stock cannot be negative");
+                System.out.println("[ERROR] Stock cannot be negative");
                 return;
             }
             
@@ -198,15 +198,15 @@ public class AdminMode {
                 
                 int rows = stmt.executeUpdate();
                 if (rows > 0) {
-                    System.out.println("✓ Stock updated successfully!");
+                    System.out.println("[OK] Stock updated successfully!");
                 } else {
-                    System.out.println("❌ Item not found");
+                    System.out.println("[ERROR] Item not found");
                 }
             }
         } catch (NumberFormatException e) {
-            System.out.println("❌ Invalid input");
+            System.out.println("[ERROR] Invalid input");
         } catch (SQLException e) {
-            System.out.println("❌ Failed to update stock: " + e.getMessage());
+            System.out.println("[ERROR] Failed to update stock: " + e.getMessage());
         }
     }
     
@@ -242,7 +242,7 @@ public class AdminMode {
                 System.out.println("No orders yet");
             }
         } catch (SQLException e) {
-            System.out.println("❌ Failed to load orders: " + e.getMessage());
+            System.out.println("[ERROR] Failed to load orders: " + e.getMessage());
         }
     }
 }

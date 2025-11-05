@@ -23,13 +23,13 @@ public class App {
         
         // Test database connection
         if (Database.getConnection() == null) {
-            System.err.println("❌ Cannot connect to database. Exiting...");
+            System.err.println("[ERROR] Cannot connect to database. Exiting...");
             return;
         }
         
-        System.out.println("\n╔═══════════════════════════════════════╗");
-        System.out.println("║          FOOD ORDERING SYSTEM           ║");
-        System.out.println("╚═════════════════════════════════════════╝");
+        System.out.println("\n+=========================================+");
+        System.out.println("|          FOOD ORDERING SYSTEM           |");
+        System.out.println("+=========================================+");
         
         // Main application loop
         while (true) {
@@ -48,7 +48,7 @@ public class App {
                 AdminMode adminMode = new AdminMode(scanner);
                 adminMode.start();
             } else if (choice.equals("3")) {
-                System.out.println("\n✓ Thank you for using Food Ordering System!");
+                System.out.println("\n[OK] Thank you for using Food Ordering System!");
                 break;
             } else {
                 System.out.println("Invalid choice. Please enter 1, 2, or 3.");

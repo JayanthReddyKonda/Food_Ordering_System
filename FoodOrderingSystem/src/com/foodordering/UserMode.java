@@ -53,7 +53,7 @@ public class UserMode {
         String username = scanner.nextLine().trim();
         
         if (username.isEmpty()) {
-            System.out.println("❌ Username cannot be empty");
+            System.out.println("[ERROR] Username cannot be empty");
             return;
         }
         
@@ -66,16 +66,16 @@ public class UserMode {
                 if (rs.next()) {
                     currentUserId = rs.getInt(1);
                     currentUsername = username;
-                    System.out.println("✓ Registration successful!");
-                    System.out.println("✓ Wallet created with $0.00");
+                    System.out.println("[OK] Registration successful!");
+                    System.out.println("[OK] Wallet created with $0.00");
                     userMenu();
                 }
             }
         } catch (SQLException e) {
             if (e.getErrorCode() == 1062) {
-                System.out.println("❌ Username already exists");
+                System.out.println("[ERROR] Username already exists");
             } else {
-                System.out.println("❌ Registration failed: " + e.getMessage());
+                System.out.println("[ERROR] Registration failed: " + e.getMessage());
             }
         }
     }
@@ -95,14 +95,14 @@ public class UserMode {
                 if (rs.next()) {
                     currentUserId = rs.getInt("user_id");
                     currentUsername = rs.getString("username");
-                    System.out.println("✓ Login successful! Welcome, " + currentUsername);
+                    System.out.println("[OK] Login successful! Welcome, " + currentUsername);
                     userMenu();
                 } else {
-                    System.out.println("❌ User not found");
+                    System.out.println("[ERROR] User not found");
                 }
             }
         } catch (SQLException e) {
-            System.out.println("❌ Login failed: " + e.getMessage());
+            System.out.println("[ERROR] Login failed: " + e.getMessage());
         }
     }
     
@@ -133,7 +133,7 @@ public class UserMode {
             } else if (choice.equals("5")) {
                 checkBalance();
             } else if (choice.equals("6")) {
-                System.out.println("✓ Logged out");
+                System.out.println("[OK] Logged out");
                 currentUserId = -1;
                 currentUsername = "";
                 break;
@@ -152,7 +152,7 @@ public class UserMode {
             double amount = Double.parseDouble(scanner.nextLine());
             
             if (amount <= 0) {
-                System.out.println("❌ Amount must be positive");
+                System.out.println("[ERROR] Amount must be positive");
                 return;
             }
             
@@ -163,13 +163,13 @@ public class UserMode {
                 stmt.executeUpdate();
             }
             
-            System.out.println("✓ $" + String.format("%.2f", amount) + " added to wallet");
+            System.out.println("[OK] $" + String.format("%.2f", amount) + " added to wallet");
             checkBalance();
             
         } catch (NumberFormatException e) {
-            System.out.println("❌ Invalid amount");
+            System.out.println("[ERROR] Invalid amount");
         } catch (SQLException e) {
-            System.out.println("❌ Failed to add money: " + e.getMessage());
+            System.out.println("[ERROR] Failed to add money: " + e.getMessage());
         }
     }
     
@@ -199,7 +199,7 @@ public class UserMode {
                 System.out.println("No items available");
             }
         } catch (SQLException e) {
-            System.out.println("❌ Failed to load menu: " + e.getMessage());
+            System.out.println("[ERROR] Failed to load menu: " + e.getMessage());
         }
     }
     
@@ -217,7 +217,7 @@ public class UserMode {
             int quantity = Integer.parseInt(scanner.nextLine());
             
             if (quantity <= 0) {
-                System.out.println("❌ Quantity must be positive");
+                System.out.println("[ERROR] Quantity must be positive");
                 return;
             }
             
@@ -232,7 +232,7 @@ public class UserMode {
                 stmt.setInt(1, itemId);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (!rs.next()) {
-                        System.out.println("❌ Item not found");
+                        System.out.println("[ERROR] Item not found");
                         return;
                     }
                     itemName = rs.getString("name");
@@ -242,7 +242,7 @@ public class UserMode {
             }
             
             if (stock < quantity) {
-                System.out.println("❌ Insufficient stock. Available: " + stock);
+                System.out.println("[ERROR] Insufficient stock. Available: " + stock);
                 return;
             }
             
@@ -254,7 +254,7 @@ public class UserMode {
                 stmt.setInt(1, currentUserId);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (!rs.next()) {
-                        System.out.println("❌ User not found");
+                        System.out.println("[ERROR] User not found");
                         return;
                     }
                     balance = rs.getDouble("wallet_balance");
@@ -262,7 +262,7 @@ public class UserMode {
             }
             
             if (balance < totalPrice) {
-                System.out.println("❌ Insufficient balance. Need: $" + String.format("%.2f", totalPrice) 
+                System.out.println("[ERROR] Insufficient balance. Need: $" + String.format("%.2f", totalPrice) 
                     + ", Have: $" + String.format("%.2f", balance));
                 return;
             }
@@ -299,7 +299,7 @@ public class UserMode {
                 
                 conn.commit();
                 
-                System.out.println("\n✓ Order placed successfully!");
+                System.out.println("\n[OK] Order placed successfully!");
                 System.out.println("  Item: " + itemName);
                 System.out.println("  Quantity: " + quantity);
                 System.out.println("  Total: $" + String.format("%.2f", totalPrice));
@@ -307,15 +307,15 @@ public class UserMode {
                 
             } catch (SQLException e) {
                 conn.rollback();
-                System.out.println("❌ Order failed: " + e.getMessage());
+                System.out.println("[ERROR] Order failed: " + e.getMessage());
             } finally {
                 conn.setAutoCommit(true);
             }
             
         } catch (NumberFormatException e) {
-            System.out.println("❌ Invalid input");
+            System.out.println("[ERROR] Invalid input");
         } catch (SQLException e) {
-            System.out.println("❌ Order failed: " + e.getMessage());
+            System.out.println("[ERROR] Order failed: " + e.getMessage());
             try {
                 conn.setAutoCommit(true);
             } catch (SQLException ex) {
@@ -355,7 +355,7 @@ public class UserMode {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("❌ Failed to load orders: " + e.getMessage());
+            System.out.println("[ERROR] Failed to load orders: " + e.getMessage());
         }
     }
     
@@ -370,11 +370,11 @@ public class UserMode {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     double balance = rs.getDouble("wallet_balance");
-                    System.out.println("💰 Current Balance: $" + String.format("%.2f", balance));
+                    System.out.println("$ Current Balance: $" + String.format("%.2f", balance));
                 }
             }
         } catch (SQLException e) {
-            System.out.println("❌ Failed to check balance: " + e.getMessage());
+            System.out.println("[ERROR] Failed to check balance: " + e.getMessage());
         }
     }
 }

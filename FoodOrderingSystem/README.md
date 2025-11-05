@@ -45,11 +45,9 @@ PASSWORD = "jayanth"
 # Windows
 javac -cp "lib\*" -d bin src\com\foodordering\*.java
 
-# Linux/Mac
-javac -cp "lib/*" -d bin src/com/foodordering/*.java
 ```
 
-Or use: `.\compile.ps1` (Windows) / `./compile.sh` (Linux/Mac)
+Or use: `.\compile.ps1` (Windows)
 
 ### 6. Run
 
@@ -57,11 +55,8 @@ Or use: `.\compile.ps1` (Windows) / `./compile.sh` (Linux/Mac)
 # Windows
 java -cp "bin;lib\*" com.foodordering.App
 
-# Linux/Mac
-java -cp "bin:lib/*" com.foodordering.App
-```
 
-Or use: `.\run.ps1` (Windows) / `./run.sh` (Linux/Mac)
+Or use: `.\run.ps1` (Windows) 
 
 ## Usage
 
